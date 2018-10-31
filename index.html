@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+        width: 90%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        width: 90%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    
+    <script>
+    // Initialize and add the map
+    function initMap() {
+      // The location of Uluru
+      var lokacja = {lat: 50, lng: 20};
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 4, center: lokacja});
+      // The marker, positioned at Uluru
+      var marker = new google.maps.Marker({position: lokacja, map: map});
+    }
+        </script>
+        <script>
+          let wysokosc = 0;
+          let dlugosc = 0;
+          document.body.addEventListener('keypress', (e)=>{
+            console.log(e);
+            switch (e.charCode){
+            //w
+            case 119:
+            {
+              wysokosc += 0.1;
+              break;
+            }
+            //a
+            case 97:
+            {
+              dlugosc -= 0.1;
+              break;
+            }
+            //s
+            case 115:
+            {
+              wysokosc -= 0.1;
+              break;
+            }
+            //d
+            case 100:
+            { 
+              dlugosc += 0.1;
+              break;
+            }
+            }
+            // marker jest w funkcji, trza go wyciągnac
+            marker.setPosition({ lat: wysokosc, lng: 20 + dlugosc })
+          });
+          
+        </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARkS-dsh-7IirtcQg3oSZEHudV6Uw9Iic&callback=initMap"
+    async defer></script>
+  </body>
+</html>
