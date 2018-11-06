@@ -13,15 +13,27 @@
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
-        height: 100%;
+        height: 90%;
         width: 90%;
         margin: 0;
         padding: 0;
+      }
+      #chat
+      {
+        width: 700px;
+        height: 300px;
+        display: block;
+        border-style: solid;
+        border-color: black;
       }
     </style>
   </head>
   <body>
     <div id="map"></div>
+    <div id="chat">
+        <button>Send</button>
+
+    </div>
     
     <script>
     // Initialize and add the map
@@ -34,7 +46,7 @@
       // The marker, positioned at Krakow
       var marker = new google.maps.Marker({position: lokacja, map: map});
 
-      let wysokosc = 0;
+          let wysokosc = 0;
           let dlugosc = 0;
           document.body.addEventListener('keypress', (e)=>{
             
@@ -64,7 +76,6 @@
               break;
             }
             }
-            // marker jest w funkcji, trza go wyciągnac
             marker.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
           });
     }
