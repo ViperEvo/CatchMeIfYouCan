@@ -1,87 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-        width: 90%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 90%;
-        width: 90%;
-        margin: 0;
-        padding: 0;
-      }
-      #chat
-      {
-        width: 700px;
-        height: 300px;
-        display: block;
-        border-style: solid;
-        border-color: black;
-      }
-    </style>
-  </head>
-  <body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WSGoogleMap</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
     <div id="map"></div>
-    <div id="chat">
-        <button>Send</button>
-
-    </div>
-    
-    <script>
-    // Initialize and add the map
-    function initMap() {
-      // The location of Krakow
-      var lokacja = {lat: 50, lng: 20};
-      // The map, centered at Krakow
-      var map = new google.maps.Map(
-          document.getElementById('map'), {zoom: 4, center: lokacja});
-      // The marker, positioned at Krakow
-      var marker = new google.maps.Marker({position: lokacja, map: map});
-
-          let wysokosc = 0;
-          let dlugosc = 0;
-          document.body.addEventListener('keypress', (e)=>{
-            
-            switch (e.charCode){
-            //w
-            case 119:
-            {
-              wysokosc += 0.1;
-              break;
-            }
-            //a
-            case 97:
-            {
-              dlugosc -= 0.1;
-              break;
-            }
-            //s
-            case 115:
-            {
-              wysokosc -= 0.1;
-              break;
-            }
-            //d
-            case 100:
-            { 
-              dlugosc += 0.1;
-              break;
-            }
-            }
-            marker.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
-          });
-    }
-        </script>
+    <section id = "wrapper">
+			
+      <header>
+         <h1>WebSocket Chat</h1>
+      </header>
+      <article>
+				
+        <form onsubmit = "addMessage(); return false;">
+           <input type = "text" id = "chat" placeholder = "type and press 
+           enter to chat" />
+        </form>
+   
+        <p id = "status">Not connected</p>
         
+        <ul id = "log"></ul>
+   
+     </article>
+    
+    <script src="script.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARkS-dsh-7IirtcQg3oSZEHudV6Uw9Iic&callback=initMap"
     async defer></script>
-  </body>
+</body>
 </html>
