@@ -13,25 +13,33 @@
           margin: 0;
           padding: 0;
        }
-       #chat { width: 97%; }
-       .message { font-weight: bold; }
-       .message:before { content: ' '; color: #bbb; font-size: 14px; }
-                       
+       #chat 
+       { 
+          width: 100%; 
+       }
+       .message
+       {
+          font-weight: bold; 
+       }
+       .message:before
+       { 
+         content: ' ';
+          color: #bbb;
+           font-size: 14px; 
+       }
         #log
-        {
+       {
           overflow: auto;
           max-height: 300px;
           list-style: none;
           padding: 0;
        }
-                       
        #log li
-        {
+       {
           border-top: 1px solid #ccc;
           margin: 0;
           padding: 10px 0;
        }
-                       
        body 
        {
           font: normal 16px/20px "Helvetica Neue", Helvetica, sans-serif;
@@ -39,71 +47,57 @@
           margin: 0;
           padding: 0;
        }
-                       
        section, header 
        {
           display: block;
        }
-                       
        #wrapper
        {
           width: 600px;
           margin: 0 auto;
-          
           border-radius: 10px;
-          
           padding-bottom: 16px;
        }
-                       
        h1 
        {
           padding-top: 10px;
        }
-                       
        h2 
        {
           font-size: 100%;
           font-style: italic;
        }
-                       
        header, article > * 
        {
           margin: 20px;
        }
-                       
        #status 
        {
           padding: 5px;
-          color: #fff;
-          background: #ccc;
+          color: rgb(240, 240, 240);
+          background: rgb(210, 210, 210);
        }
-                       
        #status.fail 
        {
-          background: #c00;
+          background: rgb(201, 18, 18);
        }
-                       
        #status.success 
        {
-          background: #0c0;
+          background: rgb(8, 160, 25);
        }
-                       
        #status.offline 
        {
-          background: #c00;
+          background: rgb(201, 18, 18);
        }
-                       
        #status.online 
        {
-          background: #0c0;
+          background: rgb(8, 160, 25);
        }
-                       
        #html5badge 
        {
           margin-left: -30px;
           border: 0;
        }
-                       
        #html5badge img 
        {
           border: 0;

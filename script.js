@@ -42,8 +42,10 @@ function initMap() {
         marker.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
         websocket.send(marker);
         });
-        }
+    }
+
         // Websocket chat
+
         connected = document.getElementById("connected");
         log = document.getElementById("log");
         chat = document.getElementById("chat");
