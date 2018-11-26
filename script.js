@@ -8,7 +8,7 @@ function initMap() {
     // The marker, positioned at Krakow
     var marker = new google.maps.Marker({position: lokacja, map: map});
 
-    let wysokosc = 0;
+        let wysokosc = 0;
         let dlugosc = 0;
         document.body.addEventListener('keypress', (e)=>{
           
@@ -40,6 +40,7 @@ function initMap() {
             }
           
         marker.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
+        websocket.send(marker);
         });
         }
         // Websocket chat
@@ -84,9 +85,7 @@ function initMap() {
         }
 					
         function onMessage(evt) {
-           // There are two types of messages:
-           // 1. a chat participant message itself
-           // 2. a message with a number of connected chat participants
+           
            var message = evt.data;
 						
            if (message.startsWith("")) 
@@ -108,3 +107,4 @@ function initMap() {
            chat.value = "";
            websocket.send(message);
         }
+        
