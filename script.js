@@ -1,18 +1,25 @@
 // Initialize and add the map
+var lokacja;
+var map;
+var marker;
+var marker2;
+let wysokosc;
+let dlugosc;
 function initMap() {
     // The location of Krakow
-    var lokacja = {lat: 50, lng: 20};
+    lokacja = {lat: 50, lng: 20};
     // The map, centered at Krakow
-    var map = new google.maps.Map(
+    map = new google.maps.Map(
         document.getElementById('map'), {zoom: 4, center: lokacja});
     // The marker, positioned at Krakow
-    var marker = new google.maps.Marker({position: lokacja, map: map});
+    marker = new google.maps.Marker({position: lokacja, map: map});
+    marker2 = new google.maps.Marker({position: lokacja, map: map});
 
-        let wysokosc = 0;
-        let dlugosc = 0;
+        wysokosc = 0;
+        dlugosc = 0;
         document.body.addEventListener('keypress', (e)=>{
           
-            switch (e.charCode){
+        switch (e.charCode){
               //w
             case 119:
             {
@@ -37,10 +44,13 @@ function initMap() {
                 dlugosc += 0.1;
                 break;
             }
-            }
+        }
           
         marker.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
-        websocket.send(marker);
+        
+        websocket.send(wysokosc);
+        websocket.send(dlugosc);
+        
         });
     }
 
@@ -62,7 +72,6 @@ function initMap() {
                  return this.indexOf(str) == 0;
               };
            }
-						
            window.addEventListener("load", onLoad, false);
         }
 					
@@ -89,14 +98,37 @@ function initMap() {
         function onMessage(evt) {
            
            var message = evt.data;
-						
-           if (message.startsWith("")) 
-              message = log.innerHTML = '<li class = "message">' + 
-                 message + "</li>" + log.innerHTML;
-           else if (message.startsWith("connected:")) {
-              message = message.slice("connected:".length);
-              connected.innerHTML = message;
+           let wysokosc2;
+           let dlugosc2;
+                        
+           switch (evt)
+           {
+                case wysokosc:
+                {
+                    wysokosc2 = evt.data;
+                    marker2.setPosition({ lat: 50 + wysokosc2, lng: 20 + dlugosc });
+                    break;
+                }
+                case dlugosc:
+                {
+                    dlugosc2 = evt.data;
+                    marker2.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc2 });
+                    break;
+                }
+                default:
+                {
+                    message = log.innerHTML = '<li class = "message">' + 
+                    message + "</li>" + log.innerHTML;
+                }
            }
+        //    if (message.startsWith("Test")) {
+            
+        //     marker2.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
+        //     }
+        //    else {
+        //       message = log.innerHTML = '<li class = "message">' + 
+        //          message + "</li>" + log.innerHTML;
+        //     }
         }
 					
         function onError(evt) {
