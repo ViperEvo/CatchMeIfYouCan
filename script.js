@@ -61,6 +61,7 @@ function initMap() {
         connected = document.getElementById("connected");
         log = document.getElementById("log");
         chat = document.getElementById("chat");
+        nick = document.getElementById("nick");
         form = chat.form;
         state = document.getElementById("status");
 					
@@ -88,12 +89,12 @@ function initMap() {
 					
         function onOpen(evt) {
            state.className = "success";
-           state.innerHTML = "Connected to server";
+           state.innerHTML = "Serwer WebSocket jest Online";
         }
 					
         function onClose(evt) {
            state.className = "fail";
-           state.innerHTML = "Not connected";
+           state.innerHTML = "Serwer WebSocket jest Offline";
            connected.innerHTML = "0";
         }
 					
@@ -102,10 +103,10 @@ function initMap() {
            var message = evt.data;
            var pozycja = JSON.parse(message);
            
-            if (pozycja['5'] === "CHAT" )
+            if (pozycja['6'] === "CHAT" )
             {
               message = log.innerHTML = '<li class = "message">' + 
-              pozycja['4'] + "</li>" + log.innerHTML;
+              pozycja['4'] + " : " + pozycja['5'] + "</li>" + log.innerHTML;
             }
             else if (pozycja['3'] === "KOD" )
             {
@@ -115,13 +116,14 @@ function initMap() {
 					
         function onError(evt) {
            state.className = "fail";
-           state.innerHTML = "Communication error";
+           state.innerHTML = "Błąd komunikacji";
         }
 					
         function addMessage() {
-           let mdata = { "4" : chat.value, "5" : "CHAT"};
+           let mdata = { "4" : nick.value,"5" : chat.value, "6" : "CHAT"};
            let message = JSON.stringify(mdata);
            chat.value = "";
+           nick.value;
            websocket.send(message);
         }
         

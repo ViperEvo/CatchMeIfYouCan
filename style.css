@@ -17,6 +17,11 @@
        { 
           width: 100%; 
        }
+       #nick
+       { 
+          width: 40%;
+          margin: 20px; 
+       }
        .message
        {
           font-weight: bold; 
