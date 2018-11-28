@@ -1,11 +1,8 @@
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
        #map 
        {
           height: 70%;
           width: 90%;
        }
-         /* Optional: Makes the sample page fill the window. */
        html, body
        {
           height: 100%;
@@ -19,8 +16,7 @@
        }
        #nick
        { 
-          width: 40%;
-          margin: 20px; 
+          width: 100%;
        }
        .message
        {

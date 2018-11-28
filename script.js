@@ -49,7 +49,7 @@ function initMap() {
           
         marker.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
         
-        let data = { "1" : wysokosc, "2" : dlugosc, "3" : kod};
+        let data = { "1" : wysokosc, "2" : dlugosc, "3" : kod, "7" : nick.value};
         let message = JSON.stringify(data);
         websocket.send(message);
         
@@ -57,7 +57,7 @@ function initMap() {
     }
 
         // Websocket chat
-
+        
         connected = document.getElementById("connected");
         log = document.getElementById("log");
         chat = document.getElementById("chat");
@@ -100,17 +100,19 @@ function initMap() {
 					
         function onMessage(evt) {
            
+           nick.value;
            var message = evt.data;
            var pozycja = JSON.parse(message);
+           console.log(pozycja['7']);
            
             if (pozycja['6'] === "CHAT" )
             {
               message = log.innerHTML = '<li class = "message">' + 
               pozycja['4'] + " : " + pozycja['5'] + "</li>" + log.innerHTML;
             }
-            else if (pozycja['3'] === "KOD" )
+            else if (pozycja['3'] === "KOD" && pozycja['7'] !== nick.value )
             {
-            marker2.setPosition({ lat: 50 + pozycja['1'], lng: 20 + pozycja['2'] });
+                    marker2.setPosition({ lat: 50 + pozycja['1'], lng: 20 + pozycja['2'] });
             }
         }
 					
