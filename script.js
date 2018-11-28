@@ -5,6 +5,7 @@ var marker;
 var marker2;
 let wysokosc;
 let dlugosc;
+let kod = "KOD";
 function initMap() {
     // The location of Krakow
     lokacja = {lat: 50, lng: 20};
@@ -48,8 +49,9 @@ function initMap() {
           
         marker.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
         
-        websocket.send(wysokosc);
-        websocket.send(dlugosc);
+        let data = { "1" : wysokosc, "2" : dlugosc, "3" : kod};
+        let message = JSON.stringify(data);
+        websocket.send(message);
         
         });
     }
@@ -98,37 +100,17 @@ function initMap() {
         function onMessage(evt) {
            
            var message = evt.data;
-           let wysokosc2;
-           let dlugosc2;
-                        
-           switch (evt)
-           {
-                case wysokosc:
-                {
-                    wysokosc2 = evt.data;
-                    marker2.setPosition({ lat: 50 + wysokosc2, lng: 20 + dlugosc });
-                    break;
-                }
-                case dlugosc:
-                {
-                    dlugosc2 = evt.data;
-                    marker2.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc2 });
-                    break;
-                }
-                default:
-                {
-                    message = log.innerHTML = '<li class = "message">' + 
-                    message + "</li>" + log.innerHTML;
-                }
-           }
-        //    if (message.startsWith("Test")) {
-            
-        //     marker2.setPosition({ lat: 50 + wysokosc, lng: 20 + dlugosc })
-        //     }
-        //    else {
-        //       message = log.innerHTML = '<li class = "message">' + 
-        //          message + "</li>" + log.innerHTML;
-        //     }
+           var pozycja = JSON.parse(message);
+           
+            if (pozycja['5'] === "CHAT" )
+            {
+              message = log.innerHTML = '<li class = "message">' + 
+              pozycja['4'] + "</li>" + log.innerHTML;
+            }
+            else if (pozycja['3'] === "KOD" )
+            {
+            marker2.setPosition({ lat: 50 + pozycja['1'], lng: 20 + pozycja['2'] });
+            }
         }
 					
         function onError(evt) {
@@ -137,7 +119,8 @@ function initMap() {
         }
 					
         function addMessage() {
-           var message = chat.value;
+           let mdata = { "4" : chat.value, "5" : "CHAT"};
+           let message = JSON.stringify(mdata);
            chat.value = "";
            websocket.send(message);
         }
